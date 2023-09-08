@@ -1,5 +1,6 @@
 const display = document.querySelector('#display');
 const numberKeys = document.querySelectorAll('button.number');
+const zeroKey = document.querySelector('.zeroKey');
 const operatorKeys = document.querySelectorAll('button.operator');
 const equalsKey = document.getElementById('=');
 const clearKey = document.getElementById('clear');
@@ -8,14 +9,12 @@ const SNARKY_MESSAGE = 'Wowww, be smarter';
 
 numberKeys.forEach(btn => {
     btn.addEventListener('click', () => {
-        if(display.textContent.length < 25) {
-            if(clickedEquals === true) {
-                display.textContent = '';
-                clickedEquals = false;
-            }
-            display.textContent += btn.id;
-        }
+        displayNumber(btn);
     });
+});
+
+zeroKey.addEventListener('click', () => {
+    displayNumber(zeroKey);
 });
 
 
@@ -88,4 +87,14 @@ function operate(num1, operator, num2) {
         default:
     }
     return result;
+}
+
+function displayNumber(btn) {
+    if(display.textContent.length < 16) {
+        if(clickedEquals === true) {
+            display.textContent = '';
+            clickedEquals = false;
+        }
+        display.textContent += btn.id;
+    }
 }

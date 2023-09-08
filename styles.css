@@ -2,14 +2,9 @@ p {
     margin: 0;
 }
 
-#id {
-    flex: 1;
-}
-
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .calculator {
@@ -43,12 +38,6 @@ body {
     flex: 5;
 }
 
-.operator {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
 button {
     flex: 1;
 }
@@ -56,10 +45,26 @@ button {
 .container2 {
     display: flex;
     flex-wrap: wrap;
-    flex: 4;
+    flex: 3;
 }
 
 .number {
     width: 33%;
     flex: auto;
+}
+
+.equals {
+    width: 33%;
+    flex: auto;
+}
+
+.zeroKey {
+    width: 67%;
+    flex: auto;
+}
+
+.operator {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
