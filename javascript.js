@@ -4,6 +4,7 @@ const decimalKey = document.querySelector('.decimal');
 const operatorKeys = document.querySelectorAll('button.operator');
 const equalsKey = document.getElementById('=');
 const clearKey = document.getElementById('clear');
+const deleteKey = document.getElementById('backspace');
 let clickedEquals = false;
 let decimalCount = 0;
 const SNARKY_MESSAGE = 'Woww, be smarter';
@@ -35,7 +36,7 @@ decimalKey.addEventListener('click', () => {
 operatorKeys.forEach(btn => {
     btn.addEventListener('click', () => {
         //allows result (from clicking equals) to be used in subsequent operations
-        if(clickedEquals === true) {
+        if(clickedEquals) {
             clickedEquals = false;
         }
         if(display.textContent === 'ERROR' || display.textContent === SNARKY_MESSAGE) {
@@ -76,6 +77,24 @@ clearKey.addEventListener('click', () => {
     clearContent();
 });
 
+deleteKey.addEventListener('click', () => {
+    let displayArray = display.textContent.trim().split(' ');
+    let checkDecimal;
+    if(!clickedEquals && displayArray.length !== 2) {
+        display.textContent = display.textContent.slice(0, -1);
+        displayArray = display.textContent.trim().split(' ');
+        if(displayArray.length === 3) {
+            checkDecimal = displayArray[2].split('').includes('.');
+        } else {
+            checkDecimal = displayArray[0].split('').includes('.');
+        }
+
+        if(!checkDecimal) {
+            decimalCount = 0;
+        }
+    }
+})
+
 function operate(num1, operator, num2) {
     if(!operator) {
         return num1;
@@ -106,7 +125,7 @@ function operate(num1, operator, num2) {
 }
 
 function checkContent() {
-    if(clickedEquals === true) {
+    if(clickedEquals) {
         clearContent();
     }
 }
@@ -115,4 +134,5 @@ function clearContent() {
     display.textContent = '';
     clickedEquals = false;
     decimalCount = 0;
+    clickedNum = false;
 }
