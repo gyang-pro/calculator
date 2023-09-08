@@ -24,7 +24,7 @@ decimalKey.addEventListener('click', () => {
         let displayArray = display.textContent.trimEnd().split(' ');
        
         if(display.textContent === '' || displayArray.length === 2) {
-            display.textContent += ('0' + decimalKey.id);
+            display.textContent += `0${decimalKey.id}`;
         } else {
             display.textContent += decimalKey.id;
         }
@@ -47,11 +47,11 @@ operatorKeys.forEach(btn => {
         if(display.textContent !== '') {
             let displayArray = display.textContent.trimEnd().split(' ');
             if(displayArray.length < 3) {
-                display.textContent = displayArray[0] + ' ' + btn.id + ' ';
+                display.textContent = `${displayArray[0]} ${btn.id} `;
             } else {
                 display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
                 if(display.textContent !== SNARKY_MESSAGE) {
-                    display.textContent += (' ' + btn.id + ' ');
+                    display.textContent += ` ${btn.id} `;
                 } else {
                     //allows displayed to be cleared after getting a SNARKY_MESSAGE
                     clickedEquals = true;
@@ -107,7 +107,7 @@ function operate(num1, operator, num2) {
 
 function checkContent() {
     if(clickedEquals === true) {
-        clearContent;
+        clearContent();
     }
 }
 
