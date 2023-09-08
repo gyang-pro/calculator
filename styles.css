@@ -5,18 +5,19 @@ p {
 body {
     display: flex;
     justify-content: center;
+    
 }
 
 .calculator {
-    width: 350px;
-    height: 450px;
-    border: 3px solid gray;
+    width: 380px;
+    height: 480px;
+    border: 5px solid midnightblue;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
 }
 
 .display {
-    border: 2px solid black;
     background-color: black;
     color: white;
     padding: 10px;
@@ -48,23 +49,33 @@ button {
     flex: 3;
 }
 
-.number {
+.number, .equals, .decimal {
     width: 33%;
     flex: auto;
 }
 
-.equals {
-    width: 33%;
-    flex: auto;
-}
-
-.zeroKey {
-    width: 67%;
-    flex: auto;
+.decimal {
+    font-weight: bold;
 }
 
 .operator {
     display: flex;
     flex-direction: column;
     flex: 1;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #333399;
+}
+
+.number, .decimal, .operator, .equals, #clear {
+    color: white;
+    font-size: 24px;
+}
+
+.number, .decimal {
+    background-color: #3366CC;
+}
+
+#clear, .equals {
+    background-color: #3399FF;
 }
