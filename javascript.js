@@ -39,7 +39,7 @@ operatorKeys.forEach(btn => {
         if(clickedEquals) {
             clickedEquals = false;
         }
-        if(display.textContent === 'ERROR' || display.textContent === SNARKY_MESSAGE) {
+        if(display.textContent === SNARKY_MESSAGE) {
             display.textContent = '';
         }
         
@@ -64,9 +64,9 @@ operatorKeys.forEach(btn => {
 
 
 equalsKey.addEventListener('click', () => {
-    if(display.textContent !== '') {
+    let displayArray = display.textContent.trim().split(' ');
+    if(display.textContent !== '' && displayArray.length === 3) {
         clickedEquals = true;
-        let displayArray = display.textContent.split(' ');
         display.textContent = '';
         display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
     }
@@ -96,12 +96,7 @@ deleteKey.addEventListener('click', () => {
 })
 
 function operate(num1, operator, num2) {
-    if(!operator) {
-        return num1;
-    } else if(!num2) {
-        return 'ERROR';
-        
-    } else if(operator === '/' && num2 == 0) {
+    if(operator === '/' && num2 == 0) {
         return SNARKY_MESSAGE;
     }
 
@@ -134,5 +129,4 @@ function clearContent() {
     display.textContent = '';
     clickedEquals = false;
     decimalCount = 0;
-    clickedNum = false;
 }
