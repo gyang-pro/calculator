@@ -73,9 +73,7 @@ equalsKey.addEventListener('click', () => {
 });
 
 
-clearKey.addEventListener('click', () => {
-    clearContent();
-});
+clearKey.addEventListener('click', clearContent);
 
 deleteKey.addEventListener('click', () => {
     let displayArray = getArray();
