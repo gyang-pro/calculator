@@ -7,13 +7,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vb;
+    background-color: #80ced6;
 }
 
 .calculator {
     width: 380px;
     height: 480px;
-    border: 5px solid midnightblue;
-    border-radius: 5px;
+    border: 10px solid midnightblue;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
