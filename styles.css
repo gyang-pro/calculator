@@ -38,6 +38,11 @@ body {
 
 .container1 {
     display: flex;
+    flex: 1;
+}
+
+.container2 {
+    display: flex;
     flex: 5;
 }
 
@@ -45,7 +50,7 @@ button {
     flex: 1;
 }
 
-.container2 {
+.container3 {
     display: flex;
     flex-wrap: wrap;
     flex: 3;
@@ -69,7 +74,7 @@ button {
     background-color: #333399;
 }
 
-.number, .decimal, .operator, .equals, #clear {
+.number, .decimal, .operator, .equals, #clear, #backspace {
     color: white;
     font-size: 24px;
 }
@@ -78,6 +83,6 @@ button {
     background-color: #3366CC;
 }
 
-#clear, .equals {
+#clear, #backspace, .equals {
     background-color: #3399FF;
 }
