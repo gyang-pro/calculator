@@ -22,7 +22,7 @@ decimalKey.addEventListener('click', () => {
     checkContent();
 
     if(decimalCount < 1) {
-        let displayArray = display.textContent.trimEnd().split(' ');
+        let displayArray = getArray();
        
         if(display.textContent === '' || displayArray.length === 2) {
             display.textContent += `0${decimalKey.id}`;
@@ -46,7 +46,7 @@ operatorKeys.forEach(btn => {
         decimalCount = 0;
 
         if(display.textContent !== '') {
-            let displayArray = display.textContent.trimEnd().split(' ');
+            let displayArray = getArray();
             if(displayArray.length < 3) {
                 display.textContent = `${displayArray[0]} ${btn.id} `;
             } else {
@@ -64,7 +64,7 @@ operatorKeys.forEach(btn => {
 
 
 equalsKey.addEventListener('click', () => {
-    let displayArray = display.textContent.trim().split(' ');
+    let displayArray = getArray();
     if(display.textContent !== '' && displayArray.length === 3) {
         clickedEquals = true;
         display.textContent = '';
@@ -78,11 +78,11 @@ clearKey.addEventListener('click', () => {
 });
 
 deleteKey.addEventListener('click', () => {
-    let displayArray = display.textContent.trim().split(' ');
+    let displayArray = getArray();
     let checkDecimal;
     if(!clickedEquals && displayArray.length !== 2) {
         display.textContent = display.textContent.slice(0, -1);
-        displayArray = display.textContent.trim().split(' ');
+        displayArray = getArray();
         if(displayArray.length === 3) {
             checkDecimal = displayArray[2].split('').includes('.');
         } else {
@@ -130,3 +130,7 @@ function clearContent() {
     clickedEquals = false;
     decimalCount = 0;
 }
+
+function getArray() {
+    return display.textContent.trimEnd().split(' ');
+};
