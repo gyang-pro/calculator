@@ -1,10 +1,10 @@
 const display = document.querySelector('#display');
-const numberKeys = document.querySelectorAll('button.number');
+const numberKeys = document.querySelectorAll('.number');
 const decimalKey = document.querySelector('.decimal');
 const operatorKeys = document.querySelectorAll('button.operator');
 const equalsKey = document.getElementById('=');
 const clearKey = document.getElementById('clear');
-const deleteKey = document.getElementById('backspace');
+const deleteKey = document.querySelector('.backspace');
 let clickedEquals = false;
 let decimalCount = 0;
 const SNARKY_MESSAGE = 'Woww, be smarter';
@@ -14,7 +14,7 @@ window.addEventListener('keydown', (event) => {
     if(event.key === 'Enter') {
         key = document.querySelector('.equals');
     }
-    
+
     let keyClass;
     if(key) keyClass = key.className;
 
@@ -27,6 +27,8 @@ window.addEventListener('keydown', (event) => {
             displayOperator(key);
         } else if(keyClass.includes('equals')) {
             displayEquals();
+        } else if(keyClass.includes('backspace')) {
+            displayDelete();
         }
     }
 });
@@ -56,21 +58,7 @@ equalsKey.addEventListener('click', () => {
 clearKey.addEventListener('click', clearContent);
 
 deleteKey.addEventListener('click', () => {
-    let displayArray = getArray();
-    let checkDecimal;
-    if(!clickedEquals && displayArray.length !== 2) {
-        display.textContent = display.textContent.slice(0, -1);
-        displayArray = getArray();
-        if(displayArray.length === 3) {
-            checkDecimal = displayArray[2].split('').includes('.');
-        } else {
-            checkDecimal = displayArray[0].split('').includes('.');
-        }
-
-        if(!checkDecimal) {
-            decimalCount = 0;
-        }
-    }
+    displayDelete();
 })
 
 function displayNum(btn) {
@@ -128,6 +116,24 @@ function displayEquals() {
         clickedEquals = true;
         display.textContent = '';
         display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
+    }
+}
+
+function displayDelete() {
+    let displayArray = getArray();
+    let checkDecimal;
+    if(!clickedEquals && displayArray.length !== 2) {
+        display.textContent = display.textContent.slice(0, -1);
+        displayArray = getArray();
+        if(displayArray.length === 3) {
+            checkDecimal = displayArray[2].split('').includes('.');
+        } else {
+            checkDecimal = displayArray[0].split('').includes('.');
+        }
+
+        if(!checkDecimal) {
+            decimalCount = 0;
+        }
     }
 }
 

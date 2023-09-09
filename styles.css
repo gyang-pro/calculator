@@ -74,7 +74,7 @@ button {
     background-color: #333399;
 }
 
-.number, .decimal, .operator, .equals, #clear, #backspace {
+.number, .decimal, .operator, .equals, #clear, .backspace {
     color: white;
     font-size: 24px;
 }
@@ -83,6 +83,6 @@ button {
     background-color: #3366CC;
 }
 
-#clear, #backspace, .equals {
+#clear, .backspace, .equals {
     background-color: #3399FF;
 }
