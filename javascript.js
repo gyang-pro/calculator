@@ -11,17 +11,22 @@ const SNARKY_MESSAGE = 'Woww, be smarter';
 
 window.addEventListener('keydown', (event) => {
     let key = document.querySelector(`.key[data-key='${event.key}']`);
+    if(event.key === 'Enter') {
+        key = document.querySelector('.equals');
+    }
+    
     let keyClass;
     if(key) keyClass = key.className;
 
     if(keyClass) {
-        console.log('test');
         if(keyClass.includes('number')) {
             displayNum(key);
         } else if(keyClass.includes('decimal')) {
             displayDecimal(key);
         } else if(keyClass.includes('operator')) {
             displayOperator(key);
+        } else if(keyClass.includes('equals')) {
+            displayEquals();
         }
     }
 });
@@ -44,12 +49,7 @@ operatorKeys.forEach(btn => {
 
 
 equalsKey.addEventListener('click', () => {
-    let displayArray = getArray();
-    if(display.textContent !== '' && displayArray.length === 3) {
-        clickedEquals = true;
-        display.textContent = '';
-        display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
-    }
+    displayEquals();
 });
 
 
@@ -119,6 +119,15 @@ function displayOperator(btn) {
                 clickedEquals = true;
             }
         }
+    }
+}
+
+function displayEquals() {
+    let displayArray = getArray();
+    if(display.textContent !== '' && displayArray.length === 3) {
+        clickedEquals = true;
+        display.textContent = '';
+        display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
     }
 }
 
