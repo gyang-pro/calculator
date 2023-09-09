@@ -10,14 +10,20 @@ let decimalCount = 0;
 const SNARKY_MESSAGE = 'Woww, be smarter';
 
 window.addEventListener('keydown', (event) => {
-    const key = document.querySelector(`.key[data-key=${event.code}]`);
-    console.log(event.code);
-    if(key.className.includes('number')) {
-        displayNum(key);
-    } else if(key.className.includes('decimal')) {
-        displayDecimal(key);
+    let key = document.querySelector(`.key[data-key='${event.key}']`);
+    let keyClass;
+    if(key) keyClass = key.className;
+
+    if(keyClass) {
+        console.log('test');
+        if(keyClass.includes('number')) {
+            displayNum(key);
+        } else if(keyClass.includes('decimal')) {
+            displayDecimal(key);
+        } else if(keyClass.includes('operator')) {
+            displayOperator(key);
+        }
     }
-    
 });
 
 numberKeys.forEach(btn => {
@@ -32,30 +38,7 @@ decimalKey.addEventListener('click', () => {
 
 operatorKeys.forEach(btn => {
     btn.addEventListener('click', () => {
-        //allows result (from clicking equals) to be used in subsequent operations
-        if(clickedEquals) {
-            clickedEquals = false;
-        }
-        if(display.textContent === SNARKY_MESSAGE) {
-            display.textContent = '';
-        }
-        
-        decimalCount = 0;
-
-        if(display.textContent !== '') {
-            let displayArray = getArray();
-            if(displayArray.length < 3) {
-                display.textContent = `${displayArray[0]} ${btn.id} `;
-            } else {
-                display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
-                if(display.textContent !== SNARKY_MESSAGE) {
-                    display.textContent += ` ${btn.id} `;
-                } else {
-                    //allows displayed to be cleared after getting a SNARKY_MESSAGE
-                    clickedEquals = true;
-                }
-            }
-        }
+        displayOperator(btn);
     });
 });
 
@@ -109,6 +92,33 @@ function displayDecimal(decimalKey) {
             display.textContent += decimalKey.id;
         }
         decimalCount += 1;
+    }
+}
+
+function displayOperator(btn) {
+    //allows result (from clicking equals) to be used in subsequent operations
+    if(clickedEquals) {
+        clickedEquals = false;
+    }
+    if(display.textContent === SNARKY_MESSAGE) {
+        display.textContent = '';
+    }
+            
+    decimalCount = 0;
+    
+    if(display.textContent !== '') {
+        let displayArray = getArray();
+        if(displayArray.length < 3) {
+            display.textContent = `${displayArray[0]} ${btn.id} `;
+        } else {
+            display.textContent = operate(displayArray[0], displayArray[1], displayArray[2]);
+            if(display.textContent !== SNARKY_MESSAGE) {
+                display.textContent += ` ${btn.id} `;
+            } else {
+                //allows displayed to be cleared after getting a SNARKY_MESSAGE
+                clickedEquals = true;
+            }
+        }
     }
 }
 
