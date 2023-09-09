@@ -9,28 +9,25 @@ let clickedEquals = false;
 let decimalCount = 0;
 const SNARKY_MESSAGE = 'Woww, be smarter';
 
+window.addEventListener('keydown', (event) => {
+    const key = document.querySelector(`.key[data-key=${event.code}]`);
+    console.log(event.code);
+    if(key.className.includes('number')) {
+        displayNum(key);
+    } else if(key.className.includes('decimal')) {
+        displayDecimal(key);
+    }
+    
+});
+
 numberKeys.forEach(btn => {
     btn.addEventListener('click', () => {
-        if(display.textContent.length < 18) {
-            checkContent();
-            display.textContent += btn.id;
-        }
+        displayNum(btn);
     });
 });
 
 decimalKey.addEventListener('click', () => {
-    checkContent();
-
-    if(decimalCount < 1) {
-        let displayArray = getArray();
-       
-        if(display.textContent === '' || displayArray.length === 2) {
-            display.textContent += `0${decimalKey.id}`;
-        } else {
-            display.textContent += decimalKey.id;
-        }
-        decimalCount += 1;
-    }
+    displayDecimal(decimalKey);
 });
 
 operatorKeys.forEach(btn => {
@@ -92,6 +89,28 @@ deleteKey.addEventListener('click', () => {
         }
     }
 })
+
+function displayNum(btn) {
+    if(display.textContent.length < 18) {
+        checkContent();
+        display.textContent += btn.id;
+    }
+}
+
+function displayDecimal(decimalKey) {
+    checkContent();
+
+    if(decimalCount < 1) {
+        let displayArray = getArray();
+       
+        if(display.textContent === '' || displayArray.length === 2) {
+            display.textContent += `0${decimalKey.id}`;
+        } else {
+            display.textContent += decimalKey.id;
+        }
+        decimalCount += 1;
+    }
+}
 
 function operate(num1, operator, num2) {
     if(operator === '/' && num2 == 0) {
